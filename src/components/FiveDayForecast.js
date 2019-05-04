@@ -4,11 +4,20 @@ class FiveDayForecast extends React.PureComponent{
   constructor(props) {
     super(props);
     this.state = { weather: '', zipCode: 37377, countryCode: 'us', open: false };
+    this.daysToMap=[]
+
     }
- 
 returnState = ()=>{
   console.log(this.props.weather)
+  console.log("days mapped " + this.daysToMap)
 }
+
+extractFiveDay = ()=>{
+  let list = this.props.weather;
+  this.daysToMap = list.filter(day=> list.indexOf(day)%8===0)
+}
+
+
     render (){
       if (this.props.weather!==''){
     return (

@@ -1,6 +1,9 @@
 import React from 'react';
 import {Input, Button, TextField, Modal, Typography } from "@material-ui/core";
 import FiveDayForecast from './FiveDayForecast';
+import { connect } from 'react-redux';
+import { fetchWeather } from '../actions';
+
 class PostList extends React.Component{
   constructor(props) {
     super(props);
@@ -67,7 +70,11 @@ class PostList extends React.Component{
           return null
         }
       }
+      componentDidMount(){
+          this.props.fetchWeather();
+      }
     render (){
+        console.log(this.props.weather)
     return(
         <div>
             <Input value={this.state.zipCode} onChange={this.AddZipToState}/>
@@ -86,4 +93,9 @@ class PostList extends React.Component{
     )
     };
 };
-export default PostList;
+
+const mapStateToProps = (state) => {
+ return { weather : state.weather}
+}
+
+export default connect(mapStateToProps, {fetchWeather})(PostList);
