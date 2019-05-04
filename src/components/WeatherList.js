@@ -1,5 +1,6 @@
 import React from 'react';
 import {Input, Button, TextField, Modal, Typography } from "@material-ui/core";
+import FiveDayForecast from './FiveDayForecast';
 class PostList extends React.Component{
   constructor(props) {
     super(props);
@@ -43,6 +44,12 @@ class PostList extends React.Component{
         }
    
       }
+      fiveDayForecast = () =>{
+        
+      }
+
+
+
       weatherValue =()=>{
           if (this.state.weather!==''){
             //   return <TextField value={this.state.weather[0].main}/>
@@ -52,11 +59,8 @@ class PostList extends React.Component{
                 <TextField value={this.state.weather[0].main.temp}/>
                 <TextField value={this.state.weather[0].main.temp_min}/>
                 <TextField value={this.state.weather[0].main.temp_max}/>
-               <div>five day</div>
-               <TextField value={this.state.weather[9].weather[0].main}/>
-               <TextField value={this.state.weather[17].weather[0].main}/>
-               <TextField value={this.state.weather[25].weather[0].main}/>
-               <TextField value={this.state.weather[33].weather[0].main}/>
+             
+       
 
             </div>
             }else {
@@ -70,6 +74,7 @@ class PostList extends React.Component{
             <Button onClick={this.weatherBalloon}>search</Button>
             <Button onClick={this.returnState}>check stuff</Button>
             <this.weatherValue />
+            <FiveDayForecast weather={this.state.weather} />
             <Modal
           
           open={this.state.open}
