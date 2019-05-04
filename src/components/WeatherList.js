@@ -19,23 +19,19 @@ class PostList extends React.Component{
     fetch('api.openweathermap.org/data/2.5/weather?id={'+this.state.zipCode+'},{'+this.state.countryCode+'}id=f6a6fec7e553937429cc047053a9c580')
     .then((response)=> {
     console.log(response);
-    // return response.json()
-
     })
- 
-      
-  
     }
     returnState=()=>{
-        console.log(this.state.weather.main)
+        console.log(this.state)
     }
-    weatherBalloon=(  ) =>{
-        fetch('https://api.openweathermap.org/data/2.5/weather?zip=' + this.state.zipCode + ',' + this.state.countryCode + '&appid=' + this.apiKey)  
+
+    weatherBalloon=(type) =>{
+        fetch('https://api.openweathermap.org/data/2.5/forecast?zip=' + this.state.zipCode + ',' + this.state.countryCode + '&appid=' + this.apiKey)  
         .then((resp)=> { return resp.json() }) // Convert data to json
         .then((data) =>{
-            console.log(data.weather[0])
-          this.setState({weather:data.weather[0]})
-          console.log(this.state)
+            console.log(data.list)
+          this.setState({weather:data.list })
+          console.log(this.state.weather[0])
 
         })
         .catch(function() {
@@ -45,7 +41,19 @@ class PostList extends React.Component{
       weatherValue =()=>{
           if (this.state.weather!==''){
             //   return <TextField value={this.state.weather[0].main}/>
-            return <div>{this.state.weather.main}</div>
+            return <div>
+                <div>today</div>
+                <TextField value={this.state.weather[0].weather[0].main}/>
+                <TextField value={this.state.weather[0].main.temp}/>
+                <TextField value={this.state.weather[0].main.temp_min}/>
+                <TextField value={this.state.weather[0].main.temp_max}/>
+               <div>five day</div>
+               <TextField value={this.state.weather[9].weather[0].main}/>
+               <TextField value={this.state.weather[17].weather[0].main}/>
+               <TextField value={this.state.weather[25].weather[0].main}/>
+               <TextField value={this.state.weather[33].weather[0].main}/>
+
+            </div>
             }else {
           return null
         }
