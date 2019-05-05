@@ -12,7 +12,7 @@ class PostList extends React.Component{
     AddZipToState=(e)=>{
         this.setState({zipCode : e.target.value})
     }
-    apiKey="f6a6fec7e553937429cc047053a9c580"
+    apiKey=process.env.REACT_APP_WEATHER_API_KEY;
     cityID=2172797;
 
     returnState=()=>{
@@ -21,29 +21,7 @@ class PostList extends React.Component{
     switchModal = ()=>{
         this.setState({open: !this.state.open})
     }
-    weatherBalloon=() =>{
-        if (this.state.zipCode.toString().length !==5){
-            this.switchModal()
-        } else {
-            fetch('https://api.openweathermap.org/data/2.5/forecast?zip=' + this.state.zipCode + ',' + this.state.countryCode + '&appid=' + this.apiKey + '&units=imperial')  
-            .then((resp)=> { return resp.json() }) // Convert data to json
-            .then((data) =>{
-                console.log(data.list)
-              this.setState({weather:data.list })
     
-            })
-            .catch(function() {
-              // catch any errors
-            });
-        }
-   
-      }
-      fiveDayForecast = () =>{
-        
-      }
-
-
-
       weatherValue = ( ) => {
           if (this.props.weather[0]){
             //   return <TextField value={this.state.weather[0].main}/>
