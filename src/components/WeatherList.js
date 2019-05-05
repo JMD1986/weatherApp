@@ -12,8 +12,13 @@ class PostList extends React.Component{
     AddZipToState=(e)=>{
         this.setState({zipCode : e.target.value})
     }
-    apiKey=process.env.REACT_APP_WEATHER_API_KEY;
-    cityID=2172797;
+    weatherSearch = ()=>{
+        if (this.state.zipCode.toString().length!==5){
+            this.switchModal()
+        } else {
+            this.props.fetchWeather(this.state.zipCode)
+        }
+    }
 
     returnState=()=>{
         console.log(this.props.weather)
@@ -24,7 +29,6 @@ class PostList extends React.Component{
     
       weatherValue = ( ) => {
           if (this.props.weather[0]){
-            //   return <TextField value={this.state.weather[0].main}/>
             return <div>
                 <div>today</div>
                 <TextField value={this.props.weather[0].weather[0].main}/>
@@ -44,7 +48,7 @@ class PostList extends React.Component{
     return(
         <div>
             <Input value={this.state.zipCode} onChange={this.AddZipToState}/>
-            <Button onClick={()=>this.props.fetchWeather(this.state.zipCode)}>search</Button>
+            <Button onClick={this.weatherSearch}>search</Button>
             <Button onClick={this.returnState}>check stuff</Button>
             <this.weatherValue />
             <FiveDayForecast weather={this.props.weather} />
