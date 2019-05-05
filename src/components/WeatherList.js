@@ -44,7 +44,7 @@ class PostList extends React.Component{
     return(
         <div>
             <Input value={this.state.zipCode} onChange={this.AddZipToState}/>
-            <Button onClick={()=>this.props.fetchWeather(37377)}>search</Button>
+            <Button onClick={()=>this.props.fetchWeather(this.state.zipCode)}>search</Button>
             <Button onClick={this.returnState}>check stuff</Button>
             <this.weatherValue />
             <FiveDayForecast weather={this.props.weather} />
