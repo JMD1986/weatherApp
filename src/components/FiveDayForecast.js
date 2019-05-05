@@ -19,7 +19,7 @@ extractFiveDay = ()=>{
 
 
     render (){
-      if (this.props.weather!==''){
+      if (this.props.weather[0]){
     return (
       <div>
 

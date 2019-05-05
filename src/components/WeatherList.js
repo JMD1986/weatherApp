@@ -15,21 +15,13 @@ class PostList extends React.Component{
     apiKey="f6a6fec7e553937429cc047053a9c580"
     cityID=2172797;
 
-
-    grabWeather =()=>{
-    //   fetch(`https://api.openweathermap.org/data/2.5/weather?zip=${this.state.zipCode},${this.state.countryCode}}&appid=${this.apiKey}`)
-    fetch('api.openweathermap.org/data/2.5/weather?id={'+this.state.zipCode+'},{'+this.state.countryCode+'}id=f6a6fec7e553937429cc047053a9c580&units=imperial')
-    .then((response)=> {
-    console.log(response);
-    })
-    }
     returnState=()=>{
-        console.log(this.state)
+        console.log(this.props.weather)
     }
     switchModal = ()=>{
         this.setState({open: !this.state.open})
     }
-    weatherBalloon=(type) =>{
+    weatherBalloon=() =>{
         if (this.state.zipCode.toString().length !==5){
             this.switchModal()
         } else {
@@ -38,7 +30,6 @@ class PostList extends React.Component{
             .then((data) =>{
                 console.log(data.list)
               this.setState({weather:data.list })
-              console.log(this.state.weather[0])
     
             })
             .catch(function() {
@@ -53,35 +44,32 @@ class PostList extends React.Component{
 
 
 
-      weatherValue =()=>{
-          if (this.state.weather!==''){
+      weatherValue = ( ) => {
+          if (this.props.weather[0]){
             //   return <TextField value={this.state.weather[0].main}/>
             return <div>
                 <div>today</div>
-                <TextField value={this.state.weather[0].weather[0].main}/>
-                <TextField value={this.state.weather[0].main.temp}/>
-                <TextField value={this.state.weather[0].main.temp_min}/>
-                <TextField value={this.state.weather[0].main.temp_max}/>
-             
-       
-
+                <TextField value={this.props.weather[0].weather[0].main}/>
+                <TextField value={this.props.weather[0].main.temp}/>
+                <TextField value={this.props.weather[0].main.temp_min}/>
+                <TextField value={this.props.weather[0].main.temp_max}/>             
             </div>
             }else {
           return null
         }
       }
-      componentDidMount(){
-          this.props.fetchWeather();
-      }
+    //   componentDidMount(){
+    //       this.props.fetchWeather();
+    //   }
     render (){
-        console.log(this.props.weather)
+        console.log(this.props.weather[0])
     return(
         <div>
             <Input value={this.state.zipCode} onChange={this.AddZipToState}/>
-            <Button onClick={this.weatherBalloon}>search</Button>
+            <Button onClick={()=>this.props.fetchWeather(37377)}>search</Button>
             <Button onClick={this.returnState}>check stuff</Button>
             <this.weatherValue />
-            <FiveDayForecast weather={this.state.weather} />
+            <FiveDayForecast weather={this.props.weather} />
             <Modal
           
           open={this.state.open}
