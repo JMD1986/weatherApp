@@ -1,5 +1,5 @@
 import React from 'react';
-import {Input, Button, TextField, Modal, Typography, AppBar, Card, ListItem, List, ListItemText, Avatar } from "@material-ui/core";
+import {Input, Button, Paper, Modal, Typography, AppBar, Card, ListItem, List, ListItemText, Avatar } from "@material-ui/core";
 import FiveDayForecast from './FiveDayForecast';
 import { connect } from 'react-redux';
 import { fetchWeather } from '../actions';
@@ -33,7 +33,11 @@ class WeatherList extends React.Component{
       weatherValue = ( ) => {
           if (this.props.weather[0]){
             return <div>
-                <div>today</div>
+                <Paper>
+                <Typography component="h2" variant="h4" gutterBottom>
+        Today
+      </Typography>
+      </Paper>
              
                 <List >
                     <ListItem>
@@ -46,19 +50,19 @@ class WeatherList extends React.Component{
                         <Avatar>
                         <WorkIcon />
                         </Avatar>
-                        <ListItemText primary={this.props.weather[0].main.temp} secondary="current Temperature" />
+                        <ListItemText primary={`${this.props.weather[0].main.temp}°`} secondary="current Temperature" />
                     </ListItem>
                     <ListItem>
                         <Avatar>
                         <BeachAccessIcon />
                         </Avatar>
-                        <ListItemText primary={this.props.weather[0].main.temp_max} secondary="Todays High" />
+                        <ListItemText primary={`${this.props.weather[0].main.temp_max}°`} secondary="Todays High" />
                     </ListItem>
                     <ListItem>
                         <Avatar>
                         <BeachAccessIcon />
                         </Avatar>
-                        <ListItemText primary={this.props.weather[0].main.temp_min} secondary="Todays Low" />
+                        <ListItemText primary={`${this.props.weather[0].main.temp_min}°`} secondary="Todays Low" />
                     </ListItem>
                     </List>        
             </div>
